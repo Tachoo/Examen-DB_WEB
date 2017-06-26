@@ -14,10 +14,10 @@
                               </figure>
                               <!--Search-->
                               <div id="searchbar">
-                                  <form id="SearchBrowser">
+                                 <form id="SearchBrowser">
                                       <input type="text" placeholder="Search in our store" id="TextArea">
                                       <input type="submit" value="Search" id="SubmitArea">
-                                  </form>
+                                  </form> 
                               </div>
                               <!--ACC-->
                               <div id="accountname">
