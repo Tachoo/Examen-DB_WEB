@@ -34,9 +34,9 @@
                                     </div>
                                     <div id="opcions">
                                         <ul>
-                                            <li><a href="#"class="links">Log Out</a></li>
-                                            <li><a href="#"class="links">MyCart</a></li>
                                             <li><a href="#"class="links">MyAccount</a></li>
+                                            <li><a href="#"class="links">MyCart</a></li>
+                                            <li><a href="#"class="links">Log Out</a></li>
                                             
                                             
                                            
@@ -68,7 +68,7 @@
               <!--mid-->
               <div class="posfixed" id="mid">
                 <!--Top panel-->
-                <div id="map"></div><!--SiteMap > someinfo extra-->
+                <div id="map">Home->SectionArea </div><!--Home -> Secction-->
                
                <div id="grid">
                    <!--Lpanel-->
@@ -87,7 +87,7 @@
                        <div id="Settings">
                          
                        </div>
-                       <div id="inlineGrid">
+                       <div id="inlineGrid"><!--Aqui sera la seccion que cambiara dependiendo la busqueda-->
                              <div>
                                  
                              </div>
@@ -98,7 +98,9 @@
               <!--bot-->
               <div id="footer" >
                    <div class="posfixed" id="bot">
-
+                     <!-- Seecion de informacion -->
+                     <!--Seccion de boletin informativo-->
+                     <!--Seccion de patrocinadores-->  
                    </div>
               </div>
         </div>
