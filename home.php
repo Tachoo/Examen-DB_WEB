@@ -68,7 +68,7 @@
               <!--mid-->
               <div class="posfixed" id="mid">
                 <!--Top panel-->
-                <div id="map">Home->SectionArea </div><!--Home -> Secction-->
+                <div id="map">Home -> SectionArea </div><!--Home -> Secction-->
                
                <div id="grid">
                    <!--Lpanel-->
