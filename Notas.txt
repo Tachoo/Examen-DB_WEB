@@ -7,53 +7,5 @@ Formularios:
    
 
 
-
-   <div id="warper">
-              
-          <div id="postfix">
-              <div class="fix"></div><!---->
-              <!--MainContent-->
-              <div class="fix" id="center">
-
-                 <div id="top">
-
-                    <div id="header">
-                   <div class="posfixed">
-                  
-                         <div id="TA"><!--Logo>SearchSection>AccountName-->
-                               <figure>
-                                   <img src="">
-                               </figure>
-                               <h1>Pleace log in for continue </h1>            
-                        </div>
-                        
-                   </div>
-
-                   </div>
-
-                 </div>
-                 
-                 <div id="mid">
-
-                   <form id="Formulario "action="<?php  echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
-                     <input type="text" placeholder="Email" name="email">
-                     <br>
-                     <?php if(!empty($errores)):/*Si tiene contenido ejecutar lo de adentro*/?>
-                     <div style="color:red;"><?php echo $errores;/*Deberia de mostrarse de color rojo para indicar que esta mal ...?*/?></div>
-                     <?php endif;/*Aqui termina la condicion o lo que se ejecutara en caso de que exista un error*/?>
-                     <input type="submit" name="submit">
-                   </form>
-
-                 </div>
-
-                 <div id="bottom">
-
-                 </div>
-                 
-
-              </div>
-              <!--MainContent-->
-              <div class="fix"></div><!---->
-          </div>
-
-        </div>     
+    Qery INNER JOIN para sacar las passwords que le corresponden a cierta persona
+   SELECT password_data.password FROM password_data JOIN users_data ON password_data.id_user = users_data.id WHERE users_data.id=1;
