@@ -1,0 +1,11 @@
+Formularios:
+
+                   
+<form action="<?php  echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+  la funcion de htmlspecialchars es para evitar errores de seguridad
+   y lo que contiene adentro es una fucncion de php  la cual hace referencia a una pagina dinamicamente
+   
+
+
+    Qery INNER JOIN para sacar las passwords que le corresponden a cierta persona
+   SELECT password_data.password FROM password_data JOIN users_data ON password_data.id_user = users_data.id WHERE users_data.id=1;
