@@ -2,8 +2,9 @@
 <?php
 //Punto de Acceso
 try
-{
- $conexion=new PDO('mysql:host=127.0.0.1;dbname=db_web_4_test','root','');
+{                   /*         10.1.2.41        u720179037_3exam u720179037_ana  SergioAnastacio20*/
+                    /*         127.0.0.1        db_web_4_test        root                         */
+ $conexion=new PDO('mysql:host=10.1.2.41;dbname=u720179037_3exam','u720179037_ana','SergioAnastacio20');
 
 }catch(PDOException $e)
 {
