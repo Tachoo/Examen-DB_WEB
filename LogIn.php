@@ -3,7 +3,9 @@
 //Punto de Acceso
 try
 {
- $conexion=new PDO('mysql:host=127.0.0.1;dbname=db_web_4_test','root','');
+// pc                                           db_web_4_test   
+// lap                                          u720179037_3exam
+ $conexion=new PDO('mysql:host=127.0.0.1;dbname=u720179037_3exam','root','');
 
 }catch(PDOException $e)
 {
