@@ -1,5 +1,7 @@
 <?php
-$title="";
+$pagetitle="";
+$Menu=array();
+
 //Conexion a la base de datos
 try //-->Intentar 
 {
@@ -11,30 +13,59 @@ try //-->Intentar
 {
 echo "Error:".$e->getMessage();
 }
+//Sacamos el numero de la pagina
 if(isset($_GET['page']))
  {
+     
   $page=$_GET['page'];
-
+  if($page<1)
+  {
+      $page=1;
+  }
  }
-
- $statement=$conexion->prepare('SELECT id,title  FROM page_data WHERE id=:page');
- $statement->execute(array(':page'=>$page));
- $result=$statement->fetch();
- //Si se hizo bien la coneexion deberemos de ver si hay resultados o no
+//Preguntamos al la db
+ $statement=$conexion->prepare('SELECT *  FROM page_data LIMIT 5 '); //Limitamos el numero de cosas por el especio en el css
+ $statement->execute();
+ $result=$statement->fetchAll();
+//Comprobamos y efectuamos cambios
  if($result>0)
  {
- if ($page==$result['id'])
- {
-     //Lo igualamos
-   $title=$result['title'];
+     foreach ($result as $key => $value)
+      {
+          //Sacamos todos los titulos del la base de datos y los ponemos en un arreglo
+        array_push($Menu,$value['title']);
+
+         //Sacamos el titulo del id  de la variable Get
+        if($value['id']==$page)
+        {
+        $pagetitle=$value['title'];
+        }
  }
-
-
- }else
+ }
+ else
  {
   echo"La Qery salio mal";
  }
- //Test only
+ //Segunda Qery
+  
+  //$statement=$conexion->prepare('SELECT name,profpic  FROM users_data where '); //Limitamos el numero de cosas por el especio en el css
+ 
+ //Tercera Qery
+   
+   $statement=$conexion->prepare('SELECT *  FROM content_data  where id=:page ');
+   $statement->execute( array(':page'=>$page));
+   $result=$statement->fetch();
+   echo"<pre>";
+   print_r($result);
+   echo"</pre>";
+   if($result>0)
+   {
+
+   }else
+   {
+       echo"se lanzo la QueryMal";
+   }
+ //
 require "index.base.php"
 
 ?>

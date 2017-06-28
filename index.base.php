@@ -2,7 +2,7 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="CSS/base_home.css">
-        <title><?php echo$title;?></title>
+        <title><?php echo$pagetitle;?></title>
     </head>
     <body>
         <div id="warper">
@@ -35,6 +35,7 @@
                                     </div>
                                     <div id="opcions">
                                         <ul>
+                                        
                                             <li><a href="#"class="links">MyAccount</a></li>
                                             <li><a href="#"class="links">MyCart</a></li>
                                             <li><a href="#"class="links">Log Out</a></li>
@@ -54,11 +55,17 @@
                          <div id="TB"><!--Navbar-->
                               
                               <ul id="navfix">
-                                <li><a href="#"><br><p>Products</p></a></li>
-                                <li><a><br><p>Sale</p></a></li>
-                                <li><a><br><p>Stocklist</p></a></li>
-                                <li><a><br><p>Gaming</p></a></li>
-                                <li><a><br><p>Stores</p></a></li>
+
+                               <?php
+                                $index=1;
+                                foreach ($Menu as $key => $value)
+                                {
+                                echo '<li><a href="index.php?page='.$index.'"><br><p>'.$value.'</p></a></li>';
+                                $index++;
+                                }
+                                         
+                                ?>
+                                
                                 
                               </ul>
 
@@ -67,8 +74,13 @@
                    </div>
               </div>
               <!--mid-->
-              <div class="posfixed" id="mid">
+              <div class="posfixed" id="mid">   
+                <?php
                 
+                ?>
+
+
+
               </div>
               <!--bot-->
               <div id="footer" >
