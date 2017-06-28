@@ -2,7 +2,6 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="CSS/base_home.css">
-        <title><?php echo$title;?></title>
     </head>
     <body>
         <div id="warper">
@@ -68,7 +67,33 @@
               </div>
               <!--mid-->
               <div class="posfixed" id="mid">
-                
+                <!--Top panel-->
+                <div id="map">Home -> SectionArea </div><!--Home -> Secction-->
+               
+               <div id="grid">
+                   <!--Lpanel-->
+                   <div id="Lpanel">
+
+                   </div>
+                   <!--Rpanel-->
+                   <div id="Rpanel">
+                       <div id="Info">
+                          <h2>Titulodelarea</h2>
+                           <div>
+                          <p>386</p>
+                          <h4>Productos Encontrados:</h4>
+                          </div>
+                       </div>
+                       <div id="Settings">
+                         
+                       </div>
+                       <div id="inlineGrid"><!--Aqui sera la seccion que cambiara dependiendo la busqueda-->
+                             <div>
+                                 
+                             </div>
+                       </div>
+                   </div>
+               </div>
               </div>
               <!--bot-->
               <div id="footer" >
