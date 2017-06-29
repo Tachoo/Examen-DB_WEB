@@ -77,6 +77,8 @@
               <div class="posfixed" id="mid">   
                 <?php
                 
+                
+
                 ?>
 
 
