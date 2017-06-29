@@ -75,12 +75,11 @@
               </div>
               <!--mid-->
               <div class="posfixed" id="mid">   
-                <?php
+                <?php if(!empty($extra)&&empty($desc)):?>
+                  <div><div>
+                <?php elseif(!empty($head)&&!empty($desc)):?>
                 
-                
-
-                ?>
-
+                <?php endif;?>
 
 
               </div>
