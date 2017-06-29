@@ -3,20 +3,20 @@ function GetClass($value)
 {
   switch ($value) {
           case 1:
-          $value="M_Left";
+          $value="izquierda";
           return $value;
           break;
           case 2:
-          $value="M_Mid";
+          $value="centro";
           return $value;
           break;
           case 3:
-          $value="M_Right";
+          $value="derecho";
           return $value;
           break;
       
       default:
-          $value="M_Mid";
+          $value="centro";
           return $value;
           break;
   }
