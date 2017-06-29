@@ -60,7 +60,7 @@ if(isset($_GET['page']))
    echo"</pre>";
    if($result>0)
    {
-
+     $TitleOf
    }else
    {
        echo"se lanzo la QueryMal";
