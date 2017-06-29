@@ -230,21 +230,10 @@ color: white;
 #mid
 {
 background: #333333;
-height: 1117px; /* test*/
-position: relative;
+
+
 }
 
-#mid .center
-{
-width: 33%;
-height: 50x;
-margin: 0 auto;
-background: rebeccapurple;
-}
-.center>h1
-{
-    color :white;
-}
 
 
 /*mid*/

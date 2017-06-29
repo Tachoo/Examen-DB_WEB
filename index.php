@@ -1,26 +1,5 @@
 <?php
-function GetClass($value)
-{
-  switch ($value) {
-          case 1:
-          $value="izquierda";
-          return $value;
-          break;
-          case 2:
-          $value="centro";
-          return $value;
-          break;
-          case 3:
-          $value="derecho";
-          return $value;
-          break;
-      
-      default:
-          $value="centro";
-          return $value;
-          break;
-  }
-}
+
 
 $pagetitle="";
 $Menu=array();
@@ -91,16 +70,16 @@ if(isset($_GET['page']))
 
        //Titulo
     $title=array();
-    array_push($title,GetClass($result['titleclass']));
+    array_push($title,$result['titleclass']);
     array_push($title,$result['title']);
       //Description 
     $Description=array();
-    array_push($Description,GetClass($result['descclass']));
+    array_push($Description,$result['descclass']);
 
     array_push($Description,$result['description']);
       // Subbaner
     $Subbaner=array();
-    array_push($Subbaner,GetClass($result['subbanerclass']));
+    array_push($Subbaner,$result['subbanerclass']);
 
     array_push($Subbaner,$result['subbaner']);
 
