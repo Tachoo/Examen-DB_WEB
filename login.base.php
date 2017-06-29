@@ -3,8 +3,8 @@
 <html>
     <head>
 
-        <link rel="stylesheet" type="text/css" href="css.css">
-        <link rel="stylesheet" type="text/css" href="estilos.css">
+        <link rel="stylesheet" type="text/css" href="CSS/css.css">
+        <link rel="stylesheet" type="text/css" href="CSS/estilos.css">
        
     </head>
     <body>
@@ -21,7 +21,7 @@
                  <?php if(!empty($errores)): ?>
                  <div class="alert error"><?php echo $errores;?></div>
                  <?php elseif($enviado):?>
-                 <div class="alert success"><?php ob_start();  header("refresh: 4; url = home.php"); echo $enviado; ob_end_flush(); ?></div>
+                 <div class="alert success"><?php ob_start();  header("refresh: 4; url = index.php"); echo $enviado; ob_end_flush(); ?></div>
                 
                  <?php endif;?>
 

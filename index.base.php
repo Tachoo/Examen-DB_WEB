@@ -2,6 +2,7 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="CSS/base_home.css">
+        <title><?php echo$pagetitle;?></title>
     </head>
     <body>
         <div id="warper">
@@ -34,6 +35,7 @@
                                     </div>
                                     <div id="opcions">
                                         <ul>
+                                        
                                             <li><a href="#"class="links">MyAccount</a></li>
                                             <li><a href="#"class="links">MyCart</a></li>
                                             <li><a href="#"class="links">Log Out</a></li>
@@ -53,11 +55,17 @@
                          <div id="TB"><!--Navbar-->
                               
                               <ul id="navfix">
-                                <li><a href="#"><br><p>Products</p></a></li>
-                                <li><a><br><p>Sale</p></a></li>
-                                <li><a><br><p>Stocklist</p></a></li>
-                                <li><a><br><p>Gaming</p></a></li>
-                                <li><a><br><p>Stores</p></a></li>
+
+                               <?php
+                                $index=1;
+                                foreach ($Menu as $key => $value)
+                                {
+                                echo '<li><a href="index.php?page='.$index.'"><br><p>'.$value.'</p></a></li>';
+                                $index++;
+                                }
+                                         
+                                ?>
+                                
                                 
                               </ul>
 
@@ -66,34 +74,13 @@
                    </div>
               </div>
               <!--mid-->
-              <div class="posfixed" id="mid">
-                <!--Top panel-->
-                <div id="map">Home -> SectionArea </div><!--Home -> Secction-->
-               
-               <div id="grid">
-                   <!--Lpanel-->
-                   <div id="Lpanel">
+              <div class="posfixed" id="mid">   
+                <?php
+                
+                ?>
 
-                   </div>
-                   <!--Rpanel-->
-                   <div id="Rpanel">
-                       <div id="Info">
-                          <h2>Titulodelarea</h2>
-                           <div>
-                          <p>386</p>
-                          <h4>Productos Encontrados:</h4>
-                          </div>
-                       </div>
-                       <div id="Settings">
-                         
-                       </div>
-                       <div id="inlineGrid"><!--Aqui sera la seccion que cambiara dependiendo la busqueda-->
-                             <div>
-                                 
-                             </div>
-                       </div>
-                   </div>
-               </div>
+
+
               </div>
               <!--bot-->
               <div id="footer" >
