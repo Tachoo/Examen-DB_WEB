@@ -22,6 +22,9 @@ if(isset($_GET['page']))
   {
       $page=1;
   }
+ }else
+ {
+     $page=1;
  }
 //Preguntamos al la db
  $statement=$conexion->prepare('SELECT *  FROM page_data LIMIT 5 '); //Limitamos el numero de cosas por el especio en el css
@@ -44,7 +47,7 @@ if(isset($_GET['page']))
  }
  else
  {
-  echo"La Qery salio mal";
+  echo"Algo fallo al tratar de traer todos los menus posibles y ligas";
  }
  //Segunda Qery
   
@@ -60,10 +63,10 @@ if(isset($_GET['page']))
    echo"</pre>";
    if($result>0)
    {
-     $TitleOf
+     $TitleOf;
    }else
    {
-       echo"se lanzo la QueryMal";
+       echo" No  Existe Contenido En este Index";
    }
  //
 require "index.base.php"
