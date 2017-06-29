@@ -2,6 +2,7 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="CSS/base_home.css">
+        <link rel="stylesheet" type="text/css" href="CSS/dinamic_presets.css">
         <link rel="stylesheet" type="text/css" href="CSS/css.css">
         <title><?php echo$pagetitle;?></title>
     </head>
@@ -83,7 +84,7 @@
                    <?php
                    if(!empty($title))
                    {
-                     echo '<div id="class'.$title[0].'"><h1>'.$title[1].'</h1></div>';
+                     echo '<div class="class'.$title[0].'"><h1>'.$title[1].'</h1></div>';
                    }
                     
                    ?>
@@ -91,7 +92,7 @@
                    <?php
                    if(!empty($Description))
                    {
-                     echo '<div id="class'.$Description[0].'"><dd>'.$Description[1].'</dd></div>';
+                     echo '<div id="dinamic_grid"><div class="class'.$Description[0].'"><dd>'.$Description[1].'</dd></div>';
                    }
 
                    ?>
@@ -99,7 +100,7 @@
                    <?php
                    if(!empty($Subbaner))
                    {
-                     echo '<div id="class'.$Subbaner[0].'"><img src="img/subbaners/'.$Subbaner[1].'"></div>';
+                     echo '<div class="class'.$Subbaner[0].'"><img src="img/subbaners/'.$Subbaner[1].'"></div></div>';
                    }
 
                    ?>

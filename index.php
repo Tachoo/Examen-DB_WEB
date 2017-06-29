@@ -60,9 +60,7 @@ if(isset($_GET['page']))
    $statement=$conexion->prepare('SELECT *  FROM content_data  where id=:page ');
    $statement->execute( array(':page'=>$page));
    $result=$statement->fetch();
-   echo"<pre>";
-   print_r($result);
-   echo"</pre>";
+
    if($result>0)
    {
        //Creamos 3 Arreglos donde en el lugar numero 0  sea la classe

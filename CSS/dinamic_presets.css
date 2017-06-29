@@ -1,0 +1,43 @@
+/*dinamic_grid*/
+#dinamic_grid
+{
+margin: 10px auto;    
+width: 100%;
+display: inline-block;
+}
+/*Left*/
+.class1
+{
+float: left;
+width: 50%;    
+
+
+}
+/*Midle*/
+.class2
+{
+margin: 0px auto;
+
+width: 33%;
+text-align: center;
+}
+/*Rigth*/
+.class3
+{
+float: right;
+width: 50%;
+
+
+}
+.class1 dd ,.class2 dd ,.class3 dd
+{
+margin: 10px;
+text-align: justify;
+vertical-align: middle;
+} 
+/*Para cualquier imagen adentro de esas classes*/
+.class1 img,.class2 img,.class3 img
+{
+   width: 100%; 
+}
+
