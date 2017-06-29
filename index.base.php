@@ -75,10 +75,35 @@
               </div>
               <!--mid-->
               <div class="posfixed" id="mid">   
-                <?php if(!empty($extra)&&empty($desc)):?>
-                  <div><div>
-                <?php elseif(!empty($head)&&!empty($desc)):?>
-                
+                <?php if(!empty($extra)):?>
+                  
+                <?php elseif(empty($extra)):?>
+                   <!--Titulo-->
+                   <?php
+                   if(!empty($title))
+                   {
+                     echo '<div class="'.$title[0].'"><h1>'.$title[1].'</h1></div>';
+                   }
+                    
+                   ?>
+                   <!--Descripcion-->
+                   <?php
+                   if(!empty($Description))
+                   {
+                     echo '<div class="'.$Description[0].'"><dd>'.$Description[1].'</dd></div>';
+                   }
+
+                   ?>
+                   <!--Imagen-->
+                   <?php
+                   if(!empty($Subbaner))
+                   {
+                     echo '<div class="'.$Subbaner[0].'"><img src="img/subbaners/'.$Subbaner[1].'"></div>';
+                   }
+
+                   ?>
+
+
                 <?php endif;?>
 
 

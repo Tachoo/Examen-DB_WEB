@@ -231,76 +231,14 @@ color: white;
 {
 background: #333333;
 height: 1117px; /* test*/
+position: relative;
 }
 
-#map
+.M_Mid
 {
- background: white;
- height: 3%;
- border: 1px solid black;
-}
-#Lpanel, #Rpanel, #grid
-{
- background: white;
- border: 1px solid black;
-}
-#grid
-{
-    position: relative;
-    display: flex;
-    background: #333333;
-}
-#Lpanel
-{
-width: 25%;
- height: 90%;
-}
-#Rpanel
-{
-width: 75%;
- height: 90%;
-}
+width: 33%;
+margin: 0 auto;
 
-
-#Info
-{
-    position: relative;
-    background: white;
-    
-    width: 100%;
-    height: 40px;
-}
-#Info>h2,#Info>div
-{
-    position: absolute;
-    bottom: 0px;
-}
-#Info>div
-{
-    right: 0px;
-}
-#Info>div>h4,#Info>div>p
-{
-    float: right;
-}
-#Info>div>p
-{
-    font-size: 14px;
-    margin-left: 3px;
-    margin-right: 5px;
-
-}
-/**/
-#Settings
-{
-    background: black;
-    height: 60px;
-}
-#inlineGrid
-{
-    
-    background: #333333;
-    height: 900px;
 }
 
 

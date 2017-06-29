@@ -1,4 +1,27 @@
 <?php
+function GetClass($value)
+{
+  switch ($value) {
+          case 1:
+          $value="M_Left";
+          return $value;
+          break;
+          case 2:
+          $value="M_Mid";
+          return $value;
+          break;
+          case 3:
+          $value="M_Right";
+          return $value;
+          break;
+      
+      default:
+          $value="M_Mid";
+          return $value;
+          break;
+  }
+}
+
 $pagetitle="";
 $Menu=array();
 
@@ -63,7 +86,24 @@ if(isset($_GET['page']))
    echo"</pre>";
    if($result>0)
    {
-     $TitleOf;
+       //Creamos 3 Arreglos donde en el lugar numero 0  sea la classe
+       // y  el lugar numero 1  sea el contenido
+
+       //Titulo
+    $title=array();
+    array_push($title,GetClass($result['titleclass']));
+    array_push($title,$result['title']);
+      //Description 
+    $Description=array();
+    array_push($Description,GetClass($result['descclass']));
+
+    array_push($Description,$result['description']);
+      // Subbaner
+    $Subbaner=array();
+    array_push($Subbaner,GetClass($result['subbanerclass']));
+
+    array_push($Subbaner,$result['subbaner']);
+
    }else
    {
        echo" No  Existe Contenido En este Index";
