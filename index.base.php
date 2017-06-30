@@ -106,15 +106,20 @@
                    }
 
                    ?>
-                   <!--Imagen-->
+<!--Imagen-->
                    <?php
-                   if(!empty($Subbaner))
+                   if(!empty($Subbaner[0])&&!empty($Subbaner[1]))
                    {
+                      
                      echo '<div class="class'.$Subbaner[0].'"><img src="img/subbaners/'.$Subbaner[1].'"></div></div>';
+                   }else
+                   {
+
                    }
 
                    ?>
                    <!--Extra-->
+                   
                    <div class="contenedor">
                      
                      <?php foreach($fotos as $foto):?>
@@ -127,11 +132,12 @@
                    
                        <div class="paginacion">
 				           <?php if ($pagina_actual > 1): ?>
-					          <a href="index.php?p=<?php echo $pagina_actual - 1; ?>" class="izquierda"><i class="fa fa-long-arrow-left"></i> Pagina Anterior</a>
+					          <a href="index.php?<?php echo "page=".$_GET['page']."&p="; echo $pagina_actual - 1;?>" class="izquierda"><i class="fa fa-long-arrow-left"></i> Pagina Anterior</a>
 				           <?php endif ?>
 
 				           <?php if ($total_paginas != $pagina_actual): ?>
-					          <a href="index.php?p=<?php echo $pagina_actual + 1; ?>" class="derecha">Pagina Siguiente <i class="fa fa-long-arrow-right"></i></a>
+                           
+					          <a href="index.php?<?php echo "page=".$_GET['page']."&p=";echo $pagina_actual + 1;?>" class="derecha">Pagina Siguiente <i class="fa fa-long-arrow-right"></i></a>
 				           <?php endif ?>
                         </div>
                     </div>
@@ -155,9 +161,13 @@
                    ?>
                    <!--Imagen-->
                    <?php
-                   if(!empty($Subbaner))
+                   if(!empty($Subbaner[0])&&!empty($Subbaner[1]))
                    {
+                      
                      echo '<div class="class'.$Subbaner[0].'"><img src="img/subbaners/'.$Subbaner[1].'"></div></div>';
+                   }else
+                   {
+
                    }
 
                    ?>

@@ -54,7 +54,7 @@ a {
 }
 
 a:hover {
-	text-decoration: underline;
+	text-decoration: none;
 }
 
 .contenedor {
@@ -79,8 +79,8 @@ header {
 	text-align: center;
 }
 
-/* --- FOTOS --- */
-.fotos .contenedor {
+/* --- imagenes --- */
+.contenedor {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
