@@ -43,7 +43,7 @@
                                         
                                             <li><a href="#"class="links">MyAccount</a></li>
                                             <li><a href="#"class="links">MyCart</a></li>
-                                            <li><a href="#"class="links">Log Out</a></li>
+                                            <li><a href="index.php?logout=3%lg$va%us235"class="links">Log Out</a></li>
                                             
                                             
                                            

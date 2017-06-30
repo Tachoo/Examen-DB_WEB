@@ -25,21 +25,11 @@
                        $statement=$conexion->prepare('SELECT nombre,profilepic  FROM users_data WHERE id=:id');
                        $statement->execute(array(':id'=>$id));
                        $result=$statement->fetchAll();
-                            echo "<pre>";
-                            print_r($result);
-                            echo "</pre>";
-                              session_start();
-                        	$_SESSION['user'] = $result; 
-
-                             
-
-                       
-
-                   ?>
-                 <div class="alert success"><?php ob_start();  /*header("refresh: 4; url = index.php");*/ echo $enviado; ob_end_flush(); ?></div>
-                
-                 <?php endif;?>
-
+                        session_start();
+                        $_SESSION['user'] = $result; 
+                ?>
+                 <div class="alert success"><?php ob_start();  header("refresh: 4; url = index.php"); echo $enviado; ob_end_flush(); ?></div>
+                <?php endif;?>
                  <input type="submit" name="submit" class="submit" value="Acceder">
             </form>
         </div>

@@ -1,5 +1,16 @@
 <?php
-session_start();
+/*Creo que no es complicado  despues de intentar mucho y pensar mucho 
+creo que hubiera preferido que me explicara el maestro o algun documento de internet...
+pero igual fue divertido
+*/
+session_start();//lo necesitamos para cada una de las paginas acceda a la session
+
+if(isset($_GET["logout"]))
+{
+    session_destroy();
+    header("refresh: 1; url = Login.php");
+    /*Para cuando quiera salir de la session*/
+}
 
 $pagetitle="";
 $Menu=array();
@@ -51,11 +62,9 @@ if(isset($_GET['page']))
  {
   echo"Algo fallo al tratar de traer todos los menus posibles y ligas";
  }
- //Segunda Qery
-  
-  //$statement=$conexion->prepare('SELECT name,profpic  FROM users_data where '); //Limitamos el numero de cosas por el especio en el css
  
- //Tercera Qery
+ //segunda  Qery para el contenido... aun que sigo pensando en que
+ //tengo que hacer una tabla llamada galeria y que alli meta registros de las imagenes y solo haga el casteo en un for 
    
    $statement=$conexion->prepare('SELECT *  FROM content_data  where id=:page ');
    $statement->execute( array(':page'=>$page));
