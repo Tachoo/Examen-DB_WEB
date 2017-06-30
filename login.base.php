@@ -28,7 +28,7 @@
                         session_start();
                         $_SESSION['user'] = $result; 
                 ?>
-                 <div class="alert success"><?php ob_start();  header("refresh: 4; url = index.php"); echo $enviado; ob_end_flush(); ?></div>
+                 <div class="alert success"><?php ob_start();  header("refresh: 4; url = index.php?page=1"); echo $enviado; ob_end_flush(); ?></div>
                 <?php endif;?>
                  <input type="submit" name="submit" class="submit" value="Acceder">
             </form>

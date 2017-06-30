@@ -1,45 +1,86 @@
 <?php
-/*Creo que no es complicado  despues de intentar mucho y pensar mucho 
-creo que hubiera preferido que me explicara el maestro o algun documento de internet...
-pero igual fue divertido
-*/
-session_start();//lo necesitamos para cada una de las paginas acceda a la session
+/*******************************************************************************************************************************/
+//Debemos de hacer un filtro para cualquier posible accion de l "USUARIO"
+/*******************************************************************************************************************************/
+session_start();//Accedemos a la  session si es que hay una
 
-if(isset($_GET["logout"]))
+//Si existe una session y esta vacia entonces debemos asumir que no esta logeado.
+if(isset($_SESSION)) 
 {
-    session_destroy();
-    header("refresh: 1; url = Login.php");
-    /*Para cuando quiera salir de la session*/
+    if(empty($_SESSION))
+    {
+        header("refresh: 0; url = Login.php");
+    }
 }
 
-$pagetitle="";
-$Menu=array();
+//Si existe alguna variable en el logout entonces debemos de asumir que el usuario quiere salir de la web
+if(isset($_GET["logout"]))
+{
+    //Cerramos la session por motivos de seguridad
+    session_destroy();
+    //Lo mandamos a la pagina de login para indicarle que su session fue cerrada
+    header("refresh: 1; url = Login.php");
+}
 
-//Conexion a la base de datos
-try //-->Intentar 
+//Obtenemos el numero de la pagina
+if(isset($_GET['page']))
+ {
+     //verificamos que la variable no este vacia
+  if(!empty($_GET['page']))
+  {
+    // solo verificamos page sea algo valido
+    if($_GET['page']<0||$_GET['page']==0)
+      {
+    //Si es <=0 entonces asumimos que esta drogrado el usuario e imponemos nuestra autoridad mandandolo a la pagina de home de todos modos.    
+       header("refresh: 0; url =index.php?page=1");
+      }
+    // si page es cualquier otra cosa  pues se lo asignamos a la variable  $page;
+    else
+      {
+       $page=$_GET['page'];
+      }
+
+ }
+ else
+ {
+   //sabemos que esta vacia la variable de page debemos de darle un index hacia la pagina prinicipal
+   $page=1;
+ }
+
+}
+else
+{
+   //Como sabemos el usuario termino haciendo algo que no preveimos ... debemos de arreglarlo 
+   header("refresh: 0; url = index.php?page=1"); //imponemos nuestra autoridad mandandolo a la pagina de home de todos modos.
+} 
+
+/*******************************************************************************************************************************/
+// Ya que sabemos que el usuario hasta el momento se porto bien o mas bien paso los filtros XD podemos continuar.
+/*******************************************************************************************************************************/
+
+//Realizamos la conexion a la base de datos
+try  
 {
 // pc                                           db_web_4_test   
 // lap                                          u720179037_3exam
  $conexion=new PDO('mysql:host=127.0.0.1;dbname=u720179037_3exam','root','');
 
-}catch(PDOException $e) //--> Mostrar errores de conexion y otras cosas
+}
+//Cualquier cosa que salio mal en la base de datos nos lo va a decir  en el catch -->(Solo problemas de conexion);
+catch(PDOException $e) 
 {
 echo "Error:".$e->getMessage();
 }
-//Sacamos el numero de la pagina
-if(isset($_GET['page']))
- {
-     
-  $page=$_GET['page'];
-  if($page<1)
-  {
-      $page=1;
-  }
- }else
- {
-     $page=1;
- }
-//Preguntamos al la db
+//Variables que ocupamos en el flujo de datos de la primera Query
+
+$pagetitle="";
+$Menu=array();
+
+/*
+//-->Primera Query!
+*/
+
+//Preguntamos al la base de datos sobre las paginas existentes 
  $statement=$conexion->prepare('SELECT *  FROM page_data LIMIT 5 '); //Limitamos el numero de cosas por el especio en el css
  $statement->execute();
  $result=$statement->fetchAll();
@@ -48,23 +89,27 @@ if(isset($_GET['page']))
  {
      foreach ($result as $key => $value)
       {
-          //Sacamos todos los titulos del la base de datos y los ponemos en un arreglo
+        //obtenemos todos los titulos del la base de datos y los ponemos en un arreglo
         array_push($Menu,$value['title']);
 
-         //Sacamos el titulo del id  de la variable Get
-        if($value['id']==$page)
-        {
-        $pagetitle=$value['title'];
-        }
- }
+        //comparamos si el id de la base de datos  es la misma del id que el usuario quiere ver
+         if($value['id']==$page)
+         {
+        //Si es asi pues el title de la pesta;a debe de cambiar
+           $pagetitle=$value['title'];
+         }
+      }
  }
  else
  {
-  echo"Algo fallo al tratar de traer todos los menus posibles y ligas";
+   //Mensaje de debug  despues se debe de cambiar por el error 404; (Literalmente no se encontro la pagina)
+   echo"Algo fallo al tratar de traer todos los menus posibles y ligas";
  }
  
- //segunda  Qery para el contenido... aun que sigo pensando en que
- //tengo que hacer una tabla llamada galeria y que alli meta registros de las imagenes y solo haga el casteo en un for 
+/*
+//-->Segunda Query!
+*/
+//preguntamos a la base de datos sobre el contenido de la pagina ya validada
    
    $statement=$conexion->prepare('SELECT *  FROM content_data  where id=:page ');
    $statement->execute( array(':page'=>$page));
@@ -72,29 +117,40 @@ if(isset($_GET['page']))
 
    if($result>0)
    {
-       //Creamos 3 Arreglos donde en el lugar numero 0  sea la classe
-       // y  el lugar numero 1  sea el contenido
+       /* 
+       Agurpamos los resultados de el Query en Arreglos:
+       el lugar numero 0  sea la classe
+       el lugar numero 1  sea el contenido
+       */ 
 
-       //Titulo
+    //Titulo
     $title=array();
     array_push($title,$result['titleclass']);
     array_push($title,$result['title']);
-      //Description 
+
+    //Description 
     $Description=array();
     array_push($Description,$result['descclass']);
-
     array_push($Description,$result['description']);
-      // Subbaner
+
+    // Subbaner
     $Subbaner=array();
     array_push($Subbaner,$result['subbanerclass']);
-
     array_push($Subbaner,$result['subbaner']);
 
    }else
    {
+       //Mensaje de debug despues se debe de cambiar por el error 404; (Literalmente no existe contenido en esa pagina y por consecuente no debemos de mostrar la pagina)
        echo" No  Existe Contenido En este Index";
    }
- //
-require "index.base.php"
+/*******************************************************************************************************************************/
+/*
+ Ya que tenemos tanto el contenido de la pagina como el titulo y otras cosas  hacemos el requerimiento de el template o la
+ maqueta de la pagina.
+*/
+/*******************************************************************************************************************************/
 
+require "index.base.php";
+
+//Fin  del flujo de datos
 ?>
