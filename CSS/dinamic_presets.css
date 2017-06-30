@@ -29,12 +29,18 @@ width: 50%;
 
 
 }
+
 .class1 dd ,.class2 dd ,.class3 dd
 {
 margin: 10px;
 text-align: justify;
 vertical-align: middle;
+color: whitesmoke;
 } 
+.class1 h1 ,.class2 h1 ,.class3 h1
+{
+    color: whitesmoke;
+}
 /*Para cualquier imagen adentro de esas classes*/
 .class1 img,.class2 img,.class3 img
 {

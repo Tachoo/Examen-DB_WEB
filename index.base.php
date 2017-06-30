@@ -19,7 +19,7 @@
                               <div id="searchbar">
                                  <form id="SearchBrowser">
                                       <input type="text" placeholder="Search in our store" id="TextArea">
-                                      <input type="submit" value="Search" id="SubmitArea">
+                                      <input type="submit" value="Search" class="submit" id="SubmitArea">
                                   </form> 
                               </div>
                               <!--ACC-->
@@ -27,11 +27,14 @@
                                    <div id="NameandPick">
                                    
                                    <figure id="ProfilePic">
-                                       <a href="#"><img src="img/profilepicks/Uzumaki.jpg"></a>
+                                       <?php
+                                       echo'<a href="#"><img src="img/profilepicks/'.$_SESSION["user"][0]["profilepic"].'"></a>'; /*Eureka !!!  esta muy grande el arreglo 3 dimencional*/
+                                       ?>
+                                       
                                    </figure>
                                    
                                    <div id="username">
-                                       <p>Uzumaki</p>
+                                       <?php echo'<p>'.$_SESSION["user"][0]["nombre"].'</p>'?>
                                        </div>
 
                                     </div>
