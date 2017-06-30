@@ -19,11 +19,11 @@ if(isset($_GET["logout"]))
     //Cerramos la session por motivos de seguridad
     session_destroy();
     //Lo mandamos a la pagina de login para indicarle que su session fue cerrada
-    header("refresh: 1; url = Login.php");
+    header("refresh: 2; url = Login.php");
 }
 
 //Obtenemos el numero de la pagina
-if(isset($_GET['page']))
+if(isset($_GET['page'])&&!empty($_SESSION))
  {
      //verificamos que la variable no este vacia
   if(!empty($_GET['page']))
@@ -32,7 +32,7 @@ if(isset($_GET['page']))
     if($_GET['page']<0||$_GET['page']==0)
       {
     //Si es <=0 entonces asumimos que esta drogrado el usuario e imponemos nuestra autoridad mandandolo a la pagina de home de todos modos.    
-       header("refresh: 0; url =index.php?page=1");
+      $page=1;
       }
     // si page es cualquier otra cosa  pues se lo asignamos a la variable  $page;
     else
@@ -51,7 +51,7 @@ if(isset($_GET['page']))
 else
 {
    //Como sabemos el usuario termino haciendo algo que no preveimos ... debemos de arreglarlo 
-   header("refresh: 0; url = index.php?page=1"); //imponemos nuestra autoridad mandandolo a la pagina de home de todos modos.
+   $page=1;
 } 
 
 /*******************************************************************************************************************************/
