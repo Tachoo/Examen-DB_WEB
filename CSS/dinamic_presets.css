@@ -1,3 +1,10 @@
+* {
+	margin: 0;
+	padding: 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
 /*dinamic_grid*/
 #dinamic_grid
 {
@@ -48,6 +55,11 @@ color: whitesmoke;
 }
 
 /*Galeia*/
+.titlulo
+{
+    margin:  0 auto;
+}
+
 a {
 	text-decoration: none;
 	color:#fff;
@@ -80,7 +92,8 @@ header {
 }
 
 /* --- imagenes --- */
-.contenedor {
+ .fotos, .contenedor 
+ {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -194,3 +207,13 @@ footer .copyright {
 }
 
 /*Galeia*/
+
+#bg
+{
+    background: #333333;
+    color: white;
+}
+#bg>p
+{
+    padding-bottom: 30px;
+}

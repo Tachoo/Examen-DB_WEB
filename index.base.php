@@ -124,7 +124,7 @@
                      
                      <?php foreach($fotos as $foto):?>
 				       <div class="thumb">
-					      <a href="foto.php?id=<?php echo $foto['id']; ?>">
+					      <a href="foto.php?id=<?php echo $foto['id']."&p="; echo $pagina_actual ?>">
 					          <img src="img/fotos/<?php echo $foto['imagen'] ?>" alt="">
 					      </a>
 				       </div>
@@ -175,16 +175,16 @@
 
                 <?php endif;?>
 
-
+               </div>
               </div>
               <!--bot-->
-              <div id="footer" >
+
+        <div id="footer" >
                    <div class="posfixed" id="bot">
                      <!-- Seecion de informacion -->
                      <!--Seccion de boletin informativo-->
                      <!--Seccion de patrocinadores-->  
                    </div>
               </div>
-        </div>
     </body>
 </html>

@@ -1,27 +1,27 @@
 <?php 
 
-require 'funciones.php';
+require "funciones.php";
 
-$conexion = conexion('galery_data', 'root', '');
+$conexion = conexion('u720179037_3exam', 'root', '');
 if (!$conexion) {
 	die();
 }
-echo"Estamos en foto";
-$id = isset($_GET['id']) ? (int)$_GET['id'] : false;
 
+$id = isset($_GET['id']) ? (int)$_GET['id'] : false;
+$page=isset($_GET['p']) ? (int)$_GET['p']:false;
 if (!$id) {
-	header('Location: index.php');
+	header('Location: index.php?page=4');
 }
 
-$statement = $conexion->prepare('SELECT * FROM fotos WHERE id = :id');
+$statement = $conexion->prepare('SELECT * FROM galery_data WHERE id = :id');
 $statement->execute(array(':id' => $id));
 
 $foto = $statement->fetch();
 
 if (!$foto) {
-	header('Location: index.php');
+	header('Location: index.php?page=4');
 }
 
-require 'index.php';
+require "foto.base.php";
 
 ?>

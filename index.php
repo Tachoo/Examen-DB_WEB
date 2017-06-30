@@ -153,15 +153,16 @@ $Menu=array();
        //Mensaje de debug despues se debe de cambiar por el error 404; (Literalmente no existe contenido en esa pagina y por consecuente no debemos de mostrar la pagina)
        echo" No  Existe Contenido En este Index";
    }
+   //Si la casilla de extra tiene algo
    if(!empty($result['extra']))
     {
         $Temp_page=$result['extra'];
-        $fotos_por_pagina = 4;
+        $fotos_por_pagina = 12;
        
         $pagina_actual = (isset($_GET['p']) ? (int)$_GET['p'] : 1);
         $inicio = ($pagina_actual > 1) ? $pagina_actual * $fotos_por_pagina - $fotos_por_pagina : 0;
 
-     $statement=$conexion->prepare('SELECT SQL_CALC_FOUND_ROWS * FROM galery_data LIMIT '.$inicio.', '.$fotos_por_pagina.'');
+     $statement=$conexion->prepare('SELECT SQL_CALC_FOUND_ROWS * FROM '.$Temp_page.'_data LIMIT '.$inicio.', '.$fotos_por_pagina.'');
      $statement->execute();
      $fotos = $statement->fetchAll();
       
