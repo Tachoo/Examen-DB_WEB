@@ -1,6 +1,14 @@
 <!DOCTYPE>
 <html>
     <head>
+        <meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, user-scalable=no,
+	     initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <!--Solo para obtener unas imagenes en forma de txt-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <!--Obtenemos una fuente desde google-->
+        <link href='https://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
+        <!--Estilosbase y una fuente Roboto-->
         <link rel="stylesheet" type="text/css" href="CSS/base_home.css">
         <link rel="stylesheet" type="text/css" href="CSS/dinamic_presets.css">
         <link rel="stylesheet" type="text/css" href="CSS/css.css">
@@ -82,6 +90,52 @@
               <div class="posfixed" id="mid">   
                 <?php if(!empty($extra)):?>
                   
+                  <!--Titulo-->
+                   <?php
+                   if(!empty($title))
+                   {
+                     echo '<div class="class'.$title[0].'"><h1>'.$title[1].'</h1></div>';
+                   }
+                    
+                   ?>
+                   <!--Descripcion-->
+                   <?php
+                   if(!empty($Description))
+                   {
+                     echo '<div id="dinamic_grid"><div class="class'.$Description[0].'"><dd>'.$Description[1].'</dd></div>';
+                   }
+
+                   ?>
+                   <!--Imagen-->
+                   <?php
+                   if(!empty($Subbaner))
+                   {
+                     echo '<div class="class'.$Subbaner[0].'"><img src="img/subbaners/'.$Subbaner[1].'"></div></div>';
+                   }
+
+                   ?>
+                   <!--Extra-->
+                   <div class="contenedor">
+                     
+                     <?php foreach($fotos as $foto):?>
+				       <div class="thumb">
+					      <a href="foto.php?id=<?php echo $foto['id']; ?>">
+					          <img src="img/fotos/<?php echo $foto['imagen'] ?>" alt="">
+					      </a>
+				       </div>
+			         <?php endforeach;?>
+                   
+                       <div class="paginacion">
+				           <?php if ($pagina_actual > 1): ?>
+					          <a href="index.php?p=<?php echo $pagina_actual - 1; ?>" class="izquierda"><i class="fa fa-long-arrow-left"></i> Pagina Anterior</a>
+				           <?php endif ?>
+
+				           <?php if ($total_paginas != $pagina_actual): ?>
+					          <a href="index.php?p=<?php echo $pagina_actual + 1; ?>" class="derecha">Pagina Siguiente <i class="fa fa-long-arrow-right"></i></a>
+				           <?php endif ?>
+                        </div>
+                    </div>
+
                 <?php elseif(empty($extra)):?>
                    <!--Titulo-->
                    <?php

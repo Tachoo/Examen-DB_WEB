@@ -137,23 +137,34 @@ $Menu=array();
     array_push($Subbaner,$result['subbanerclass']);
     array_push($Subbaner,$result['subbaner']);
     
+    $extra=$result['extra'];
     
     /*problema de extra*/
     /*
     Extra es un campo que debendiendo de lo que tenga adentro es lo que va a mostrar
     */
     /*problema de extra*/
-    if(!empty($result['extra']))
-    {
-        $fotos_por_pagina = 8;
+    
+     
+     
 
+   }else
+   {
+       //Mensaje de debug despues se debe de cambiar por el error 404; (Literalmente no existe contenido en esa pagina y por consecuente no debemos de mostrar la pagina)
+       echo" No  Existe Contenido En este Index";
+   }
+   if(!empty($result['extra']))
+    {
+        $Temp_page=$result['extra'];
+        $fotos_por_pagina = 8;
+        echo $Temp_page;
         $pagina_actual = (isset($_GET['p']) ? (int)$_GET['p'] : 1);
         $inicio = ($pagina_actual > 1) ? $pagina_actual * $fotos_por_pagina - $fotos_por_pagina : 0;
 
-     $statement=$conexion->prepare('SELECT SQL_CALC_FOUND_ROWS * FROM '.GetExtra($result['extra']).'_content LIMIT '.$inicio.', '.$fotos_por_pagina.'');
+     $statement=$conexion->prepare('SELECT SQL_CALC_FOUND_ROWS * FROM galery_data LIMIT '.$inicio.', '.$fotos_por_pagina.'');
      $statement->execute();
      $fotos = $statement->fetchAll();
-
+      
      if (!$fotos) {
      	header('Location: index.php?page=1');
      }
@@ -165,14 +176,6 @@ $Menu=array();
      $total_paginas = ceil($total_post / $fotos_por_pagina);
 
     }
-     
-     
-
-   }else
-   {
-       //Mensaje de debug despues se debe de cambiar por el error 404; (Literalmente no existe contenido en esa pagina y por consecuente no debemos de mostrar la pagina)
-       echo" No  Existe Contenido En este Index";
-   }
 /*******************************************************************************************************************************/
 /*
  Ya que tenemos tanto el contenido de la pagina como el titulo y otras cosas  hacemos el requerimiento de el template o la
