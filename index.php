@@ -44,33 +44,32 @@ if(isset($_GET['page'])&&!empty($_SESSION))
  else
  {
    //sabemos que esta vacia la variable de page debemos de darle un index hacia la pagina prinicipal
-   $page=1;
+   //$page=1;
  }
 
 }
 else
 {
    //Como sabemos el usuario termino haciendo algo que no preveimos ... debemos de arreglarlo 
-   $page=1;
+  // $page=1;
 } 
 
 /*******************************************************************************************************************************/
 // Ya que sabemos que el usuario hasta el momento se porto bien o mas bien paso los filtros XD podemos continuar.
 /*******************************************************************************************************************************/
 
+//Requerimos parte del archivo 'Funciones.php' para poder hacer uso de ellas
+require 'funciones.php';
 //Realizamos la conexion a la base de datos
-try  
+$conexion = conexion('u720179037_3exam', 'root', '');
+//Solo si algo salio mal hay que cortar la conexion;
+if (!$conexion) 
 {
-// pc                                           db_web_4_test   
-// lap                                          u720179037_3exam
- $conexion=new PDO('mysql:host=127.0.0.1;dbname=u720179037_3exam','root','');
+	die();
+}
 
-}
-//Cualquier cosa que salio mal en la base de datos nos lo va a decir  en el catch -->(Solo problemas de conexion);
-catch(PDOException $e) 
-{
-echo "Error:".$e->getMessage();
-}
+
+
 //Variables que ocupamos en el flujo de datos de la primera Query
 
 $pagetitle="";
@@ -81,7 +80,7 @@ $Menu=array();
 */
 
 //Preguntamos al la base de datos sobre las paginas existentes 
- $statement=$conexion->prepare('SELECT *  FROM page_data LIMIT 5 '); //Limitamos el numero de cosas por el especio en el css
+ $statement=$conexion->prepare('SELECT *  FROM page_data'); //Limitamos el numero de cosas por el especio en el css
  $statement->execute();
  $result=$statement->fetchAll();
 //Comprobamos y efectuamos cambios
@@ -114,7 +113,7 @@ $Menu=array();
    $statement=$conexion->prepare('SELECT *  FROM content_data  where id=:page ');
    $statement->execute( array(':page'=>$page));
    $result=$statement->fetch();
-
+    
    if($result>0)
    {
        /* 
@@ -122,7 +121,7 @@ $Menu=array();
        el lugar numero 0  sea la classe
        el lugar numero 1  sea el contenido
        */ 
-
+    
     //Titulo
     $title=array();
     array_push($title,$result['titleclass']);
@@ -137,6 +136,37 @@ $Menu=array();
     $Subbaner=array();
     array_push($Subbaner,$result['subbanerclass']);
     array_push($Subbaner,$result['subbaner']);
+    
+    
+    /*problema de extra*/
+    /*
+    Extra es un campo que debendiendo de lo que tenga adentro es lo que va a mostrar
+    */
+    /*problema de extra*/
+    if(!empty($result['extra']))
+    {
+        $fotos_por_pagina = 8;
+
+        $pagina_actual = (isset($_GET['p']) ? (int)$_GET['p'] : 1);
+        $inicio = ($pagina_actual > 1) ? $pagina_actual * $fotos_por_pagina - $fotos_por_pagina : 0;
+
+     $statement=$conexion->prepare('SELECT SQL_CALC_FOUND_ROWS * FROM '.GetExtra($result['extra']).'_content LIMIT '.$inicio.', '.$fotos_por_pagina.'');
+     $statement->execute();
+     $fotos = $statement->fetchAll();
+
+     if (!$fotos) {
+     	header('Location: index.php?page=1');
+     }
+
+     $statement = $conexion->prepare("SELECT FOUND_ROWS() as total_filas");
+     $statement->execute();
+     $total_post = $statement->fetch()['total_filas'];
+
+     $total_paginas = ceil($total_post / $fotos_por_pagina);
+
+    }
+     
+     
 
    }else
    {
