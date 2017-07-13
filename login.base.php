@@ -22,13 +22,27 @@
                  <div class="alert error"><?php echo $errores;?></div>
                  <?php elseif($enviado):?>
                  <?php
+                 //Hacemos una session en base al contenido del usuario verificado.
                        $statement=$conexion->prepare('SELECT nombre,profilepic  FROM users_data WHERE id=:id');
                        $statement->execute(array(':id'=>$id));
-                       $result=$statement->fetchAll();
-                        session_start();
-                        $_SESSION['user'] = $result; 
+                       $statement->setFetchMode(PDO::FETCH_ASSOC);
+                       $result=$statement->fetch();
+                       session_start();
+                        //Guaramos solamente el Nombre , Profilepic
+                        /*------------------nombre------------------*/
+                         $_SESSION['user'] = $result['nombre'];
+                        /*------------------pic------------------*/
+                         $_SESSION['prof'] = $result['profilepic'];
+                       
                 ?>
-                 <div class="alert success"><?php ob_start();  header("refresh: 4; url = index.php?page=1"); echo $enviado; ob_end_flush(); ?></div>
+                 <div class="alert success">
+                 <?php
+                // ob_start();
+                 header("refresh: 3; url = index.php?page=1");
+                 echo $enviado;
+                // ob_end_flush();
+                 ?>
+                 </div>
                 <?php endif;?>
                  <input type="submit" name="submit" class="submit" value="Acceder">
             </form>

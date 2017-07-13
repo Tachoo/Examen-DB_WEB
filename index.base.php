@@ -15,7 +15,6 @@
         <title><?php echo$pagetitle;?></title>
     </head>
     <body>
-    <?php echo $page."<br>";?>
         <div id="warper">
               <!--top-->
               <div id="header">
@@ -37,13 +36,13 @@
                                    
                                    <figure id="ProfilePic">
                                        <?php
-                                       echo'<a href="#"><img src="img/profilepicks/'.$_SESSION["user"][0]["profilepic"].'"></a>'; /*Eureka !!!  esta muy grande el arreglo 3 dimencional*/
+                                       echo'<a href="#"><img src="img/profilepicks/'.$_SESSION["prof"].'"></a>'; /*Eureka !!!  esta muy grande el arreglo 3 dimencional*/
                                        ?>
                                        
                                    </figure>
                                    
                                    <div id="username">
-                                       <?php echo'<p>'.$_SESSION["user"][0]["nombre"].'</p>'?>
+                                       <?php echo'<p>'.$_SESSION["user"].'</p>'?>
                                        </div>
 
                                     </div>
@@ -52,7 +51,7 @@
                                         
                                             <li><a href="#"class="links">MyAccount</a></li>
                                             <li><a href="#"class="links">MyCart</a></li>
-                                            <li><a href="index.php?logout=3%lg$va%us235"class="links">Log Out</a></li>
+                                            <li><a href="index.php?<?php echo 'page='.$_GET['page'].'&logout=3%lg$va%us235'; ?>"class="links">Log Out</a></li>
                                             
                                             
                                            
@@ -89,9 +88,12 @@
               </div>
               <!--mid-->
               <div class="posfixed" id="mid">   
-                <?php if(!empty($extra)):?>
-                  
-                  <!--Titulo-->
+                <!--Donde se encuentra el contenido principal de la pagina-->
+                <?php if($contenido==0):?>
+                <!--No hay contenido que mostrar-->
+                <?php elseif($contenido==1):?>
+                <!-- Tenemos contenido que mostrar -->
+                <!--Titulo-->
                    <?php
                    if(!empty($title))
                    {
@@ -113,49 +115,13 @@
                    {
                       
                      echo '<div class="class'.$Subbaner[0].'"><img src="img/subbaners/'.$Subbaner[1].'"></div></div>';
-                   }else
-                   {
-
                    }
 
                    ?>
-                   <!--Extra-->
-                   
-                   
-
-                <?php elseif(empty($extra)):?>
-                   <!--Titulo-->
-                   <?php
-                   if(!empty($title))
-                   {
-                     echo '<div class="class'.$title[0].'"><h1>'.$title[1].'</h1></div>';
-                   }
-                    
-                   ?>
-                   <!--Descripcion-->
-                   <?php
-                   if(!empty($Description))
-                   {
-                     echo '<div id="dinamic_grid"><div class="class'.$Description[0].'"><dd>'.$Description[1].'</dd></div>';
-                   }
-
-                   ?>
-                   <!--Imagen-->
-                   <?php
-                   if(!empty($Subbaner[0])&&!empty($Subbaner[1]))
-                   {
-                      
-                     echo '<div class="class'.$Subbaner[0].'"><img src="img/subbaners/'.$Subbaner[1].'"></div></div>';
-                   }
-
-                   ?>
-                   <!---->
-                    <?php elseif(!empty($extra)):?>
-                    
-
                 <?php endif;?>
+                <!--Donde se encuentra el contenido principal de la pagina-->
                       
-                      <!---->
+                      <!--Donde se encuentra el contenido secundario de la pagina(geleria)-->
                       <div class="contenedor">
                      
                      <?php foreach($fotos as $foto):?>
@@ -176,8 +142,9 @@
 					          <a href="index.php?<?php echo "page=".$_GET['page']."&p=";echo $pagina_actual + 1;?>" class="derecha">Pagina Siguiente <i class="fa fa-long-arrow-right"></i></a>
 				           <?php endif ?>
                         </div>
+                        
                     </div>
-                      <!---->
+                       <!--Donde se encuentra el contenido secundario de la pagina(geleria)-->
 
                </div>
               </div>
@@ -185,9 +152,7 @@
 
         <div id="footer" >
                    <div class="posfixed" id="bot">
-                     <!-- Seecion de informacion -->
-                     <!--Seccion de boletin informativo-->
-                     <!--Seccion de patrocinadores-->  
+                    
                    </div>
               </div>
     </body>

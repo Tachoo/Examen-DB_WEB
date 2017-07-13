@@ -1,7 +1,8 @@
 <?php
 /*******************************************************************************************************************************/
-//Debemos de hacer un filtro para cualquier posible accion de l "USUARIO"
+// Revison 13/7/2017. Version 1.2 completada
 /*******************************************************************************************************************************/
+
 session_start();//Accedemos a la  session si es que hay una
 
 //Si existe una session y esta vacia entonces debemos asumir que no esta logeado.
@@ -9,24 +10,24 @@ if(isset($_SESSION))
 {
     if(empty($_SESSION))
     {
-        header("refresh: 0; url = Login.php");
+        header("refresh: 1;url = Login.php");
     }
 }
 
 //Si existe alguna variable en el logout entonces debemos de asumir que el usuario quiere salir de la web
 if(isset($_GET["logout"]))
 {
-    //Cerramos la session por motivos de seguridad
+  /*-->Deberemos de enviarlo a la pagina donde se encontraba y aparte enviar los valores de logout*/
     session_destroy();
-    //Lo mandamos a la pagina de login para indicarle que su session fue cerrada
-    header("refresh: 2; url = Login.php");
+    //Lo mandamos a la pagina de login para indicarle que su session fue cerrada correctamente
+    header("refresh: 1; url = Login.php");
 }
 
 //Obtenemos el numero de la pagina
-if(isset($_GET['page'])&&!empty($_SESSION))
+if(isset($_GET['page']))
  {
      //verificamos que la variable no este vacia
-  if(!empty($_GET['page']))
+  if(!empty($_GET['page'])&&!empty($_SESSION))
   {
     // solo verificamos page sea algo valido
     if($_GET['page']<0||$_GET['page']==0)
@@ -43,46 +44,49 @@ if(isset($_GET['page'])&&!empty($_SESSION))
  }
  else
  {
-   //sabemos que esta vacia la variable de page debemos de darle un index hacia la pagina prinicipal
-   //$page=1;
+   //Si no esta creado o esta vacio el la variable Get de page solo la creamos y la igualamos a page;
+
+    $_GET['page']=1;
+    $page=$_GET['page'];
+
  }
 
 }
 else
 {
-   //Como sabemos el usuario termino haciendo algo que no preveimos ... debemos de arreglarlo 
-  // $page=1;
+   //Si no esta creado o esta vacio el la variable Get de page solo la creamos y la igualamos a page;
+  $_GET['page']=1;
+  $page=$_GET['page'];
+
 } 
 
 /*******************************************************************************************************************************/
-// Ya que sabemos que el usuario hasta el momento se porto bien o mas bien paso los filtros XD podemos continuar.
+// Ya que sabemos que el usuario hasta el momento se porto bien o mas bien paso todos los filtros podemos continuar.
 /*******************************************************************************************************************************/
 
 //Requerimos parte del archivo 'Funciones.php' para poder hacer uso de ellas
 require 'funciones.php';
 //Realizamos la conexion a la base de datos
 $conexion = conexion('u720179037_3exam', 'root', '');
-//Solo si algo salio mal hay que cortar la conexion;
+//Solo si algo salio mal hay que cortar el flujo de datos
 if (!$conexion) 
 {
 	die();
 }
-
-
-
 //Variables que ocupamos en el flujo de datos de la primera Query
 
 $pagetitle="";
 $Menu=array();
+$contenido=0;
 
-/*
 //-->Primera Query!
-*/
 
 //Preguntamos al la base de datos sobre las paginas existentes 
- $statement=$conexion->prepare('SELECT *  FROM page_data'); //Limitamos el numero de cosas por el especio en el css
+ $statement=$conexion->prepare('SELECT *  FROM page_data');
  $statement->execute();
- $result=$statement->fetchAll();
+  $statement->setFetchMode(PDO::FETCH_ASSOC);
+  $result=$statement->fetchAll();
+  
 //Comprobamos y efectuamos cambios
  if($result>0)
  {
@@ -98,6 +102,7 @@ $Menu=array();
            $pagetitle=$value['title'];
          }
       }
+     
  }
  else
  {
@@ -109,12 +114,11 @@ $Menu=array();
 //-->Segunda Query!
 */
 //preguntamos a la base de datos sobre el contenido de la pagina ya validada
-    $page=$_GET['page'];
-   $statement=$conexion->prepare('SELECT *  FROM content_data  where page_id=:page '); // Modificacion para que las paginas puedan cambiarse de lugar... #Quiero entregar para ser libre
+  $statement=$conexion->prepare('SELECT *  FROM content_data  where page_id=:page '); 
+  $statement->execute( array(':page'=>$page));
+  $statement->setFetchMode(PDO::FETCH_ASSOC);
+  $result=$statement->fetch();
    
-   $statement->execute( array(':page'=>$page));
-   $result=$statement->fetch();
-    
    if($result>0)
    {
        /* 
@@ -137,36 +141,25 @@ $Menu=array();
     $Subbaner=array();
     array_push($Subbaner,$result['subbanerclass']);
     array_push($Subbaner,$result['subbaner']);
-    
-    
 
-     
-    
-    /*problema de extra*/
-    /*
-    Extra es un campo que debendiendo de lo que tenga adentro es lo que va a mostrar
-    */
-    /*problema de extra*/
-    
-     
-     
-
-   }else
+    $contenido=1;
+   }
+   else
    {
-       //Mensaje de debug despues se debe de cambiar por el error 404; (Literalmente no existe contenido en esa pagina y por consecuente no debemos de mostrar la pagina)
-       echo" No  Existe Contenido En este Index";
+      //No se encontro contenido primario en el index
    }
    
-   /* Debemos de ver si realmente exixte una galeria en la pagina*/
-   //Si la casilla de extra tiene algo
-     
-      $statement=$conexion->prepare('SELECT * FROM galery_data  WHERE page_id=:page');
+//Ultima Query para la galeria de imagenes...
+          
+          //Verificar que realmente exista por lomenos 1 imagen  en dicha pagina.
+     $statement=$conexion->prepare('SELECT * FROM galery_data  WHERE page_id=:page');
      $statement->execute( array(':page'=>$page) );
-      $result=$statement->fetchall();
-      if($result>0)
+     $statement->setFetchMode(PDO::FETCH_ASSOC);
+     $result=$statement->fetchAll();
+     if($result>0)
       {
 
-        $fotos_por_pagina = 12;
+        $fotos_por_pagina = 4;
        
         $pagina_actual = (isset($_GET['p']) ? (int)$_GET['p'] : 1);
         $inicio = ($pagina_actual > 1) ? $pagina_actual * $fotos_por_pagina - $fotos_por_pagina : 0;
