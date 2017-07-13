@@ -229,22 +229,21 @@ background:#333333;
 {
 
 width: 100%;
-height: 45px;
-display: inline-block;
+height: 95px;
 }
 
 #navfix
 {
 display: inline-block;
 width: 100%;
-height: 100%;
+
 }
 #navfix li
 {
-    display: inline-block;
+    float: left;
     margin-left: 1px;
     width: 19%;  /*-->> Perfecto*/
-    height: 100%;
+    
     
 }
 #navfix li:hover
