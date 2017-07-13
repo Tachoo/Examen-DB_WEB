@@ -1,7 +1,5 @@
 
 <?php
-
-
 //Punto de Acceso
 try
 {                   /*         10.1.2.121        u720179037_3exam u720179037_ana  SergioAnastacio20*/
