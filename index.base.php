@@ -15,6 +15,7 @@
         <title><?php echo$pagetitle;?></title>
     </head>
     <body>
+    <?php echo $page."<br>";?>
         <div id="warper">
               <!--top-->
               <div id="header">
@@ -166,11 +167,11 @@
 			         <?php endforeach;?>
                    
                        <div class="paginacion">
-				           <?php if ($pagina_actual > 1): ?>
+				           <?php if ($pagina_actual > 1&& !empty($fotos)): ?>
 					          <a href="index.php?<?php echo "page=".$_GET['page']."&p="; echo $pagina_actual - 1;?>" class="izquierda"><i class="fa fa-long-arrow-left"></i> Pagina Anterior</a>
 				           <?php endif ?>
 
-				           <?php if ($total_paginas != $pagina_actual): ?>
+				           <?php if ($total_paginas != $pagina_actual && !empty($fotos)): ?>
                            
 					          <a href="index.php?<?php echo "page=".$_GET['page']."&p=";echo $pagina_actual + 1;?>" class="derecha">Pagina Siguiente <i class="fa fa-long-arrow-right"></i></a>
 				           <?php endif ?>

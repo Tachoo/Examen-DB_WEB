@@ -109,8 +109,9 @@ $Menu=array();
 //-->Segunda Query!
 */
 //preguntamos a la base de datos sobre el contenido de la pagina ya validada
-   
+    $page=$_GET['page'];
    $statement=$conexion->prepare('SELECT *  FROM content_data  where page_id=:page '); // Modificacion para que las paginas puedan cambiarse de lugar... #Quiero entregar para ser libre
+   
    $statement->execute( array(':page'=>$page));
    $result=$statement->fetch();
     
@@ -158,6 +159,13 @@ $Menu=array();
    
    /* Debemos de ver si realmente exixte una galeria en la pagina*/
    //Si la casilla de extra tiene algo
+     
+      $statement=$conexion->prepare('SELECT * FROM galery_data  WHERE page_id=:page');
+     $statement->execute( array(':page'=>$page) );
+      $result=$statement->fetchall();
+      if($result>0)
+      {
+
         $fotos_por_pagina = 12;
        
         $pagina_actual = (isset($_GET['p']) ? (int)$_GET['p'] : 1);
@@ -166,10 +174,11 @@ $Menu=array();
      $statement=$conexion->prepare('SELECT SQL_CALC_FOUND_ROWS * FROM galery_data  WHERE page_id=:page LIMIT '.$inicio.', '.$fotos_por_pagina.'');
      $statement->execute( array(':page'=>$page) );
      $fotos = $statement->fetchAll();
-      
-     if (!$fotos) {
-     	header('refresh: 0; url = index.php');
-     }
+     if (!$fotos) 
+     {
+    // header('refresh: 0; url = index.php?page=1');
+     } 
+     
 
      $statement = $conexion->prepare("SELECT FOUND_ROWS() as total_filas");
      $statement->execute();
@@ -177,6 +186,12 @@ $Menu=array();
 
      $total_paginas = ceil($total_post / $fotos_por_pagina);
         
+
+      }
+      else
+      {
+
+      }
 
 
     
