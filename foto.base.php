@@ -25,7 +25,7 @@
 		<div class="foto">
 			<img src="img/fotos/<?php echo $foto['imagen']; ?>" alt="">
 			<p class="texto"><?php echo $foto['descripcion'].'</p>';?>
-			<a href="index.php?page=4<?php echo"&p=".$page; ?>" class="regresar"><i class="fa fa-long-arrow-left"></i> Regresar</a>
+			<a href="index.php?page=<?php echo"$Back&p=".$page; ?>" class="regresar"><i class="fa fa-long-arrow-left"></i> Regresar</a>
 		</div>
 	</div>
 

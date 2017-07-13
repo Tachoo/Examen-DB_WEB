@@ -110,7 +110,7 @@ $Menu=array();
 */
 //preguntamos a la base de datos sobre el contenido de la pagina ya validada
    
-   $statement=$conexion->prepare('SELECT *  FROM content_data  where id=:page ');
+   $statement=$conexion->prepare('SELECT *  FROM content_data  where page_id=:page '); // Modificacion para que las paginas puedan cambiarse de lugar... #Quiero entregar para ser libre
    $statement->execute( array(':page'=>$page));
    $result=$statement->fetch();
     
@@ -137,7 +137,9 @@ $Menu=array();
     array_push($Subbaner,$result['subbanerclass']);
     array_push($Subbaner,$result['subbaner']);
     
-    $extra=$result['extra'];
+    
+
+     
     
     /*problema de extra*/
     /*
@@ -153,21 +155,20 @@ $Menu=array();
        //Mensaje de debug despues se debe de cambiar por el error 404; (Literalmente no existe contenido en esa pagina y por consecuente no debemos de mostrar la pagina)
        echo" No  Existe Contenido En este Index";
    }
+   
+   /* Debemos de ver si realmente exixte una galeria en la pagina*/
    //Si la casilla de extra tiene algo
-   if(!empty($result['extra']))
-    {
-        $Temp_page=$result['extra'];
         $fotos_por_pagina = 12;
        
         $pagina_actual = (isset($_GET['p']) ? (int)$_GET['p'] : 1);
         $inicio = ($pagina_actual > 1) ? $pagina_actual * $fotos_por_pagina - $fotos_por_pagina : 0;
 
-     $statement=$conexion->prepare('SELECT SQL_CALC_FOUND_ROWS * FROM '.$Temp_page.'_data LIMIT '.$inicio.', '.$fotos_por_pagina.'');
-     $statement->execute();
+     $statement=$conexion->prepare('SELECT SQL_CALC_FOUND_ROWS * FROM galery_data  WHERE page_id=:page LIMIT '.$inicio.', '.$fotos_por_pagina.'');
+     $statement->execute( array(':page'=>$page) );
      $fotos = $statement->fetchAll();
       
      if (!$fotos) {
-     	header('Location: index.php?page=1');
+     	header('refresh: 0; url = index.php');
      }
 
      $statement = $conexion->prepare("SELECT FOUND_ROWS() as total_filas");
@@ -175,8 +176,13 @@ $Menu=array();
      $total_post = $statement->fetch()['total_filas'];
 
      $total_paginas = ceil($total_post / $fotos_por_pagina);
+        
 
-    }
+
+    
+   /*Debemos de ver si relmente existe una galeria en la pagina*/
+
+
 /*******************************************************************************************************************************/
 /*
  Ya que tenemos tanto el contenido de la pagina como el titulo y otras cosas  hacemos el requerimiento de el template o la

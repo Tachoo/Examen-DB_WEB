@@ -120,27 +120,7 @@
                    ?>
                    <!--Extra-->
                    
-                   <div class="contenedor">
-                     
-                     <?php foreach($fotos as $foto):?>
-				       <div class="thumb">
-					      <a href="foto.php?id=<?php echo $foto['id']."&p="; echo $pagina_actual ?>">
-					          <img src="img/fotos/<?php echo $foto['imagen'] ?>" alt="">
-					      </a>
-				       </div>
-			         <?php endforeach;?>
                    
-                       <div class="paginacion">
-				           <?php if ($pagina_actual > 1): ?>
-					          <a href="index.php?<?php echo "page=".$_GET['page']."&p="; echo $pagina_actual - 1;?>" class="izquierda"><i class="fa fa-long-arrow-left"></i> Pagina Anterior</a>
-				           <?php endif ?>
-
-				           <?php if ($total_paginas != $pagina_actual): ?>
-                           
-					          <a href="index.php?<?php echo "page=".$_GET['page']."&p=";echo $pagina_actual + 1;?>" class="derecha">Pagina Siguiente <i class="fa fa-long-arrow-right"></i></a>
-				           <?php endif ?>
-                        </div>
-                    </div>
 
                 <?php elseif(empty($extra)):?>
                    <!--Titulo-->
@@ -165,15 +145,38 @@
                    {
                       
                      echo '<div class="class'.$Subbaner[0].'"><img src="img/subbaners/'.$Subbaner[1].'"></div></div>';
-                   }else
-                   {
-
                    }
 
                    ?>
-
+                   <!---->
+                    <?php elseif(!empty($extra)):?>
+                    
 
                 <?php endif;?>
+                      
+                      <!---->
+                      <div class="contenedor">
+                     
+                     <?php foreach($fotos as $foto):?>
+				       <div class="thumb">
+					      <a href="foto.php?id=<?php echo $foto['id']."&p="; echo $pagina_actual; echo"&page=".$_GET['page']; ?>">
+					          <img src="img/fotos/<?php echo $foto['imagen'] ?>" alt="">
+					      </a>
+				       </div>
+			         <?php endforeach;?>
+                   
+                       <div class="paginacion">
+				           <?php if ($pagina_actual > 1): ?>
+					          <a href="index.php?<?php echo "page=".$_GET['page']."&p="; echo $pagina_actual - 1;?>" class="izquierda"><i class="fa fa-long-arrow-left"></i> Pagina Anterior</a>
+				           <?php endif ?>
+
+				           <?php if ($total_paginas != $pagina_actual): ?>
+                           
+					          <a href="index.php?<?php echo "page=".$_GET['page']."&p=";echo $pagina_actual + 1;?>" class="derecha">Pagina Siguiente <i class="fa fa-long-arrow-right"></i></a>
+				           <?php endif ?>
+                        </div>
+                    </div>
+                      <!---->
 
                </div>
               </div>
