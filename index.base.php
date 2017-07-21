@@ -70,11 +70,12 @@
                               <ul id="navfix">
 
                                <?php
-                                $index=1;
+                                $i=0;
                                 foreach ($Menu as $key => $value)
                                 {
-                                echo '<li><a href="index.php?page='.$index.'"><br><p>'.$value.'</p></a></li>';
-                                $index++;
+
+                                echo '<li><a href="index.php?page='.$Aid[$key].'"><br><p>'.$value.'</p></a></li>';
+                                
                                 }
                                          
                                 ?>
@@ -105,7 +106,7 @@
                    <?php
                    if(!empty($Description))
                    {
-                     echo '<div id="dinamic_grid"><div class="class'.$Description[0].'"><dd>'.$Description[1].'</dd></div>';
+                     echo '<div id="dinamic_grid"><div class="class'.$Description[0].'"><p>'.$Description[1].'</p></div>';
                    }
 
                    ?>

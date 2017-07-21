@@ -77,6 +77,7 @@ if (!$conexion)
 
 $pagetitle="";
 $Menu=array();
+$Aid=array();
 $contenido=0;
 
 //-->Primera Query!
@@ -93,7 +94,10 @@ $contenido=0;
      foreach ($result as $key => $value)
       {
         //obtenemos todos los titulos del la base de datos y los ponemos en un arreglo
+        
+        array_push($Aid,$value['id']);
         array_push($Menu,$value['title']);
+        
 
         //comparamos si el id de la base de datos  es la misma del id que el usuario quiere ver
          if($value['id']==$page)
